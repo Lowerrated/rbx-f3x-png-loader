@@ -39,6 +39,7 @@ if syn then
 	PNGImporterGui.Frame.Draggable = true
 	local folder_exists = isfolder("png_images")
 	local tutorialvideo_exists = isfile("pngfileloader-tutorial.png")
+	local has_saw_tutorial = isfile("hasseentutorial.txt")
 	local videoframe = Instance.new("ImageLabel")
 	videoframe.Parent = ScreenGui
 	videoframe.Position = UDim2.new(0.5, -568, 0.5, -319)
@@ -47,22 +48,28 @@ if syn then
 	if not folder_exists then
 		makefolder("png_images")
 	end
+	if not has_saw_tutorial then
+		writefile("hasseentutorial.txt", "false")
+	end
 	if not tutorialvideo_exists then
 		writefile("pngfileloader-tutorial.png", game:HttpGetAsync("https://github.com/Lowerrated/rbx-f3x-png-loader/raw/main/tutorial.png"))
 	end
 	videoframe.Image = getsynasset("pngfileloader-tutorial.png")
 	videoframe.ImageRectSize = Vector2.new(1136, 639)
 	videoframe.ScaleType = Enum.ScaleType.Fit
-	spawn(function()
-		task.wait(5)
-		videoframe.ImageRectOffset = Vector2.new(2272, 0)
-		task.wait(8)
-		videoframe.ImageRectOffset = Vector2.new(3408, 0)
-		task.wait(14)
-		videoframe.ImageRectOffset = Vector2.new(4544, 0)
-		task.wait(21)
-		videoframe:Destroy()
-	end)
+	if readfile("hasseentutorial.txt") == "false" then
+		spawn(function()
+			task.wait(5)
+			videoframe.ImageRectOffset = Vector2.new(2272, 0)
+			task.wait(8)
+			videoframe.ImageRectOffset = Vector2.new(3408, 0)
+			task.wait(14)
+			videoframe.ImageRectOffset = Vector2.new(4544, 0)
+			task.wait(21)
+			videoframe:Destroy()
+			writefile("hasseentutorial.txt", "true")
+		end)
+	end
 	local function refreshfiles()
 		local files = listfiles("png_images")
 		for _, v in pairs(PNGImporterGui.Frame.ScrollingFrame:GetChildren()) do
