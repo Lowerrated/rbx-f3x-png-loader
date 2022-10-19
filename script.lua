@@ -69,6 +69,8 @@ if syn then
 			videoframe:Destroy()
 			writefile("hasseentutorial.txt", "true")
 		end)
+	else
+		videoframe:Destroy()
 	end
 	local function refreshfiles()
 		local files = listfiles("png_images")
