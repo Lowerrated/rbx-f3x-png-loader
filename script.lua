@@ -1,3 +1,4 @@
+-- made by scriptifer#9511
 if syn then
 	local function gettool()
 		local tools = {}
