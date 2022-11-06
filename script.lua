@@ -1,5 +1,5 @@
 -- made by scriptifer#9511
-if syn then
+if getsynasset and writefile and listfiles and readfile then
 	local function gettool()
 		local tools = {}
 		local thetool
@@ -233,6 +233,6 @@ if syn then
 else
 	local msg = Instance.new("Hint")
 	msg.Parent = game:GetService("CoreGui")
-	msg.Text = "This script only works in Synapse X"
+	msg.Text = "Your executor doesn't support this script."
 	game:GetService("Debris"):AddItem(msg, 2)
 end
