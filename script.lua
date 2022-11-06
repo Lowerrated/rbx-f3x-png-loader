@@ -1,5 +1,5 @@
 -- made by scriptifer#9511
-if getsynasset and writefile and listfiles and readfile then
+if getsynasset and writefile and listfiles and readfile and isfile and isfolder then
 	local function gettool()
 		local tools = {}
 		local thetool
