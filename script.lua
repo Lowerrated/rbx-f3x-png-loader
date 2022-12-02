@@ -199,12 +199,20 @@ if getsynasset and writefile and listfiles and readfile and isfile and isfolder 
 							local v19 = ServerEndpoint:InvokeServer("CreatePart", "Normal", CFrame.new(), v12)
 							local transparency = 1 - v17 / 255
 							v19.Position = at + v11 + Vector3.new(v15, v18 / 2, v14);
-							ServerEndpoint:InvokeServer("SyncMove", {{CFrame = v19.CFrame, Part = v19}})
+							spawn(function()
+								ServerEndpoint:InvokeServer("SyncMove", {{CFrame = v19.CFrame, Part = v19}})
+							end)
 							if transparency > 0 then
-								ServerEndpoint:InvokeServer("SyncMaterial", {{Part = v19, Transparency = transparency}})
+								spawn(function()
+									ServerEndpoint:InvokeServer("SyncMaterial", {{Part = v19, Transparency = transparency}})
+								end)
 							end
-							ServerEndpoint:InvokeServer("SyncResize", {{CFrame = v19.CFrame, Part = v19, Size = Vector3.new(1, v18, 1)}})
-							ServerEndpoint:InvokeServer("SyncColor", {{Color = v16, Part = v19, UnionColoring = true}})
+							spawn(function()
+								ServerEndpoint:InvokeServer("SyncResize", {{CFrame = v19.CFrame, Part = v19, Size = Vector3.new(1, v18, 1)}})
+							end)
+							spawn(function()
+								ServerEndpoint:InvokeServer("SyncColor", {{Color = v16, Part = v19, UnionColoring = true}})
+							end)
 							v8 = v8 + 1;
 							if v8 % 1000 == 0 then
 								l__RunService__5.Heartbeat:Wait();
